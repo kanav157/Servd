@@ -3,7 +3,13 @@ import {
   SignInButton,
   SignUpButton,
 } from "@clerk/nextjs";
-
+import { Menu } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { auth } from "@clerk/nextjs/server";
 
 import Link from "next/link";
@@ -33,7 +39,7 @@ const Header = async () => {
   return (
     <header className="fixed top-0 w-full bg-white border-b border-gray-200 backdrop-blur-md z-50 supports-backdrop-blur:bg-white/75">
 
-      <nav className="container mx-auto px-4 h-16 flex justify-between items-center gap-2">
+      <nav className="container mx-auto px-4 h-16 flex  items-center justify-between">
 
         {/* Logo */}
         <Link
@@ -70,6 +76,40 @@ const Header = async () => {
           </Link>
 
         </div>
+
+        {/* Mobile Menu */}
+<div className="md:hidden">
+  <Sheet>
+    <SheetTrigger asChild>
+      <button className="p-2">
+        <Menu className="w-6 h-6" />
+      </button>
+    </SheetTrigger>
+
+    <SheetContent side="left" className="w-[280px]">
+      <SheetTitle>Navigation Menu</SheetTitle>
+      <div className="flex flex-col gap-6 mt-8">
+
+        <Link
+          href="/recipes"
+          className="flex items-center gap-3 text-lg font-medium"
+        >
+          <Cookie className="w-5 h-5" />
+          My Recipes
+        </Link>
+
+        <Link
+          href="/pantry"
+          className="flex items-center gap-3 text-lg font-medium"
+        >
+          <Refrigerator className="w-5 h-5" />
+          My Pantry
+        </Link>
+
+      </div>
+    </SheetContent>
+  </Sheet>
+</div>
 
         {/* Right Side */}
         <div className="flex items-center gap-4">
